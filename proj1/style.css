@@ -1,0 +1,109 @@
+/*아래 내용은 CSS에서 자세히 배울 내용이지만, 대략 어떤 역할을 하는지 봐두시기 바랍니다.*/
+
+/* 구글 폰트에서 나눔고딕/Permanent marker체를 불러온다(import)는 뜻입니다 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+
+
+/*각 태그를 꾸며주는 부분입니다*/
+
+body {
+  background-color: white;
+  font-family: 'Nanum Gothic', sans-serif;
+  padding: 5px 25px;
+  font-size: 14px;
+  color: #444;
+}
+
+h1 {
+  font-family: 'permanent marker', serif;
+  font-size: 80px;
+  color: #000;
+  margin: -20px 0px;
+  padding: 0px;
+}
+
+h2{
+  font-family: 'permanent marker', serif;
+  font-weight: 400;
+  font-size: 35px;
+  color: dimgrey;
+  margin: 0px;
+  padding: 0px;
+}
+
+
+h3{
+  color:dimgray;
+}
+
+
+table, th, td {
+  border: 1px solid #d0d0d0;
+  border-collapse: collapse;
+}
+th, td{
+  padding: 7px;
+}
+
+hr{
+  border: 1px solid #f4f4f4;
+}
+
+img{
+  margin: 30px 30px;
+}
+fieldset {margin-bottom:15px; }
+legend {font-weight:bold; }
+ul {list-style-type: none;}
+li {line-height:30px;}
+
+a{
+  text-decoration: none;
+  color:darkcyan;
+}
+
+ol{
+  line-height: 2.0;
+}
+
+
+/*버튼 위에 마우스를 올렸을 때, 눌렀을 때 서식을 주는 부분입니다.*/
+
+.btn{
+  width: 100px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 14px;
+  color: dimgray;
+  padidng: 10px;
+  margin: 5px;
+}
+
+.btn:hover{
+  width: 100px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #ded;
+  font-size: 14px;
+  color: dimgray;
+  padidng: 10px;
+  margin: 5px;
+}
+
+.btn:active {
+  width: 100px;
+  height: 40px;
+  border: 1px solid #ddd;
+  background-color: #aba;
+  font-size: 14px;
+  color: dimgray;
+  padidng: 10px;
+  margin: 5px;
+}
+
+input {
+  outline: none;
+}
