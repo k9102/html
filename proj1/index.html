@@ -27,7 +27,7 @@
 
   <p>- 1인 최대 4매까지 예약이 가능합니다.</p>
 
-  <a href="">[예매하기]로 가기</a>
+  <a href="#reservation">[예매하기]로 가기</a>
 
   <!--2.공연정보-->
 
@@ -66,10 +66,10 @@
 
 
   <!--3.예매하기-->
-  <h3>예매하기</h3>
+  <h3 id="reservation">예매하기</h3>
   <hr>
 
-  <form>
+  <form method="GET">
     <h4>예매자 정보</h4>
     <ul>
       <li>
@@ -86,13 +86,16 @@
         예매가능 좌석
         <ul>
           <li>
-            <lable><input type="radio" name="seat" value="R">스탠딩 R석 (182,000원)</lable>
+            <input id="1" type="radio" name="seat" value="R">
+            <label for="1">스탠딩 R석 (182,000원)</label>
           </li>
           <li>
-            <lable><input type="radio" name="seat" value="S">스탠딩 S석 (171,000원)</lable>
+            <input id="2" type="radio" name="seat" value="S">
+            <label for="2">스탠딩 S석 (171,000원)</label>
           </li>
           <li>
-            <lable><input type="radio" name="seat" value="A">스탠딩 A석 (160,000원)</lable>
+            <input id="3" type="radio" name="seat" value="A">
+            <label for="3">스탠딩 A석 (160,000원)</label>
           </li>
         </ul>
       </li>
@@ -106,8 +109,8 @@
         <textarea placeholder="티켓은 공연 7일전부터 발송됩니다"></textarea>
       </li>
     </ol>
-    <input type="reset" value="다시 작성">
-    <input type="submit" value="예매하기">
+    <input type="reset" class="btn" value="다시 작성">
+    <input type="submit" class="btn" value="예매하기">
   </form>
   <!--4. 보너스문제: 광고 배너-->
 </body>
