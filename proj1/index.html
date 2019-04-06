@@ -34,6 +34,12 @@
   <h3>공연정보</h3>
   <hr>
   <table>
+    <colgroup>
+      <col style="background:#f8f8f8;">
+      <col>
+      <col style="background:#f8f8f8;">
+      <col>
+    </colgroup>
     <tr>
       <th>주연</th>
       <td>Queen, U2 외</td>
@@ -48,34 +54,61 @@
     </tr>
     <tr>
       <th>공연장소</th>
-      <td>웸블리 스타디움</td>
+      <td><a href="http://www.wembleystadium.com" target="_blank">웸블리 스타디움</a></td>
       <th>예매수수료</th>
       <td>1,000원</td>
     </tr>
     <tr>
       <th>취소환불방법</th>
-      <td>My티켓 > 예매내역에서 직접 취소할 수 있습니다.</td>
+      <td colspan="3">My티켓 > 예매내역에서 직접 취소할 수 있습니다.</td>
     </tr>
   </table>
 
 
   <!--3.예매하기-->
-  예매하기
+  <h3>예매하기</h3>
+  <hr>
 
-  예매자 정보
-  이름
-  연락처
+  <form>
+    <h4>예매자 정보</h4>
+    <ul>
+      <li>
+        <lable>이름<input type="text" required></lable>
+      </li>
+      <li>
+        <lable>연락처<input type="text" placeholder="-없이 입력하세요" required></lable>
+      </li>
+    </ul>
 
-  옵션선택
-  예매가능 좌석
-  스탠딩 R석 (182,000원)
-  스탠딩 S석 (171,000원)
-  스탠딩 A석 (160,000원)
-  공연일자 선택
-  배송요청사항
-  다시 작성
-  예매하기
-
+    <h4>옵션선택</h4>
+    <ol>
+      <li>
+        예매가능 좌석
+        <ul>
+          <li>
+            <lable><input type="radio" name="seat" value="R">스탠딩 R석 (182,000원)</lable>
+          </li>
+          <li>
+            <lable><input type="radio" name="seat" value="S">스탠딩 S석 (171,000원)</lable>
+          </li>
+          <li>
+            <lable><input type="radio" name="seat" value="A">스탠딩 A석 (160,000원)</lable>
+          </li>
+        </ul>
+      </li>
+      <li>
+        공연일자 선택
+        <br>
+        <input type="date">
+      </li>
+      <li>배송요청사항
+        <br>
+        <textarea placeholder="티켓은 공연 7일전부터 발송됩니다"></textarea>
+      </li>
+    </ol>
+    <input type="reset" value="다시 작성">
+    <input type="submit" value="예매하기">
+  </form>
   <!--4. 보너스문제: 광고 배너-->
 </body>
 
