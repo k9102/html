@@ -7,7 +7,7 @@
             var btn = document.getElementById('btn');
             var cnt = document.getElementById('cnt');
             btn.addEventListener('click', function () {
-                memo.push({ 'date': Date(), 'cnt': cnt.value });
+                memo.push({ 'date': new Date(), 'cnt': cnt.value });
                 var mlist = "";
                 for (var i = 0; i < memo.length; i++) {
                     mlist += memo[i].date + ":" + memo[i].cnt + "\n";
