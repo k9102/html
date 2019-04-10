@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 
 <head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
         var memo = [];
         window.onload = function () {
             var btn = document.getElementById('btn');
             var cnt = document.getElementById('cnt');
             btn.addEventListener('click', function () {
-                memo.push({ 'date': new Date(), 'cnt': cnt.value });
-                var mlist = "";
-                for (var i = 0; i < memo.length; i++) {
-                    mlist += memo[i].date + ":" + memo[i].cnt + "\n";
-                }
-                alert(mlist);
+                tmp = { 'date': new Date(), 'cnt': cnt.value };
+                memo.push(tmp);
+                $("#header").after("<tr><td>"+tmp.date+"</td>"+"<td>"+tmp.cnt+"</td>"+"</tr>");
                 cnt.value = "";
             });
         }
@@ -24,4 +22,7 @@
     <p>메모를 입력하세요</p>
     <input type="text" id="cnt">
     <input type="button" id="btn" value="저장">
+    <table id="tbl">
+        <tr id="header"><th>날짜</th><th>메모</th></tr>
+    </table>
 </body>
