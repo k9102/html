@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<head>
+    <script>
+        var memo = [];
+        window.onload = function () {
+            var btn = document.getElementById('btn');
+            var cnt = document.getElementById('cnt');
+            btn.addEventListener('click', function () {
+                memo.push({ 'date': Date(), 'cnt': cnt.value });
+                var mlist = "";
+                for (var i = 0; i < memo.length; i++) {
+                    mlist += memo[i].date + ":" + memo[i].cnt + "\n";
+                }
+                alert(mlist);
+                cnt.value = "";
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>심플메모</h1>
+    <p>메모를 입력하세요</p>
+    <input type="text" id="cnt">
+    <input type="button" id="btn" value="저장">
+</body>
