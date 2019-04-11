@@ -8,19 +8,29 @@
             var btn = document.getElementById('btn');
             var cnt = document.getElementById('cnt');
             btn.addEventListener('click', function () {
-                tmp = { 'date': new Date(), 'cnt': cnt.value };
+                tmp = { 'id': memo.length + 1, 'date': new Date(), 'note': cnt.value };
                 memo.push(tmp);
                 $("#header").after(
-                    `<tr><td>${tmp.date}</td><td>${tmp.cnt}</td>` +
+                    `<tr><td>${tmp.date}</td><td>${tmp.note}</td>` +
                     `<th><input type="button" class="remove" value="삭제" id="${memo.length}"></th>` +
                     "</tr>"
                 );
                 cnt.value = "";
                 $(`#${memo.length}`).on("click", function () {
-                    pos = parseInt(this.id)-1;
-                    memo.splice(pos,1);
+                    pos = parseInt(this.id) - 1;
+                    memo.splice(pos, 1);
                     $(this).parent().parent().remove();
                 });
+
+                $.ajax({
+                    url: 'https://js-basic.herokuapp.com/k9102/notes',
+                    type: 'post',
+                    data: tmp,
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+
             });
         }
     </script>
@@ -37,4 +47,22 @@
             <th>메모</th>
         </tr>
     </table>
+    <script>
+        
+        $.ajax({
+            method: "DELETE",
+            url: "https://js-basic.herokuapp.com/k9102/notes/1",
+        }).done(function (msg) {
+            console.log(msg);
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "https://js-basic.herokuapp.com/k9102/notes",
+            dataType: 'json'
+        }).done(function (msg) {
+            console.log(msg);
+        });
+
+    </script>
 </body>
