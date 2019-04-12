@@ -109,7 +109,10 @@ section {
 }
   
 /* 다단 문제 */
-
+#intro {
+  column-count: 2;
+  column-rule: #000 solid 1px
+}
 /* 테두리 문제 */
 section h3 {
   float:left;
@@ -120,6 +123,13 @@ section h3 {
 	position:relative;
 	padding:0 0 0 20px;
   margin:50px 0 10px 0;
+
+  background-color: palevioletred;
+  color:white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px
 }
 h3 span {
   margin: 20px auto;
@@ -144,6 +154,43 @@ h3 span {
 
 /* 선택자 문제 */
 
+input:checked+img {
+  display: inline;
+} 
+
+input 
+{
+  position: absolute;
+  top:10px;
+}
+
+input[value="seoul"]
+{
+  left:10px;
+}
+
+input[value="incheon"]
+{
+  left:40px;
+}
+
+input[value="jeonju"]
+{
+  left:70px;
+}
+
+input[value="deagu"]
+{
+  left:100px;
+}
+input[value="busan"]
+{
+  left:130px;
+}
+input[value="jeju"]
+{
+  left:160px;
+}
 /* 선택자 문제 (심화) */
   
 /* colophon */
