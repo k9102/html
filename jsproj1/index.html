@@ -3,13 +3,30 @@
 <head>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
-        var memo = [];
-        window.onload = function () {
-            var btn = document.getElementById('btn');
-            var cnt = document.getElementById('cnt');
-            btn.addEventListener('click', function () {
-                var rec = { 'id': memo.length + 1, 'date': new Date(), 'note': cnt.value };
+        function getId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        $(document).ready(function () {
+            /* download notes from the server*/
+            $.ajax({
+                method: "GET",
+                url: "https://js-basic.herokuapp.com/k9102/notes",
+                dataType: 'json'
+            }).done(function (msg) {
+                console.log(msg);
+                recs = msg.results;
+                for (i in recs) {
+                    var rec = { 'id': recs[i].id, 'date': new Date(recs[i].date), 'note': recs[i].note };
+                    addItem(rec);
+                }
+            });
+
+            /*attach the handler to "save" button*/
+            $("#btn").on('click', function () {
+                var rec = { 'id': getId(), 'date': new Date(), 'note': $('#cnt').val() };
                 addItem(rec);
+                /*upload a note to the server*/
                 $.ajax({
                     url: 'https://js-basic.herokuapp.com/k9102/notes',
                     type: 'post',
@@ -20,21 +37,22 @@
                 });
 
             });
-        }
+        });
 
         function addItem(rec) {
             console.log(rec);
-            memo.push(rec);
+            /*show a note to the screen*/
             $("#header").after(
-                `<tr><td>${rec.date.toLocaleString('en-US',{ hour12: false })}</td><td>${rec.note}</td>` +
+                `<tr><td>${rec.date.toLocaleString('en-US', { hour12: false })}</td><td>${rec.note}</td>` +
                 `<th><input type="button" class="remove" value="삭제" id="${rec.id}"></th>` +
                 "</tr>"
             );
+
+            /*clear edit box*/
             cnt.value = "";
 
+            /*attach the handler to "remove" button*/
             $(`#${rec.id}`).on("click", function () {
-                var pos = parseInt(this.id) - 1;
-                memo.splice(pos, 1);
                 $(this).parent().parent().remove();
                 $.ajax({
                     method: "DELETE",
@@ -59,20 +77,4 @@
             <th>메모</th>
         </tr>
     </table>
-    <script>
-        $.ajax({
-            method: "GET",
-            url: "https://js-basic.herokuapp.com/k9102/notes",
-            dataType: 'json'
-        }).done(function (msg) {
-            console.log(msg);
-            recs = msg.results;
-            for (i in recs) {
-                var rec = { 'id': recs[i].id, 'date': new Date(recs[i].date), 'note': recs[i].note };
-                memo.push(rec);
-                addItem(rec);
-            }
-        });
-
-    </script>
 </body>
