@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8">
+    <title>Simple Memo</title>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
+        url = "https://js-basic.herokuapp.com/k9102/notes";
         function getId() {
             return Math.random().toString(36).substr(2, 9);
         }
@@ -11,7 +14,7 @@
             /* download notes from the server*/
             $.ajax({
                 method: "GET",
-                url: "https://js-basic.herokuapp.com/k9102/notes",
+                url: url,
                 dataType: 'json'
             }).done(function (msg) {
                 console.log(msg);
@@ -22,18 +25,17 @@
                 }
             });
 
-            /*attach the handler to "save" button*/
+            /*attach the handler to "저장" button*/
             $("#btn").on('click', function () {
                 var rec = { 'id': getId(), 'date': new Date(), 'note': $('#cnt').val() };
                 addItem(rec);
                 /*upload a note to the server*/
                 $.ajax({
-                    url: 'https://js-basic.herokuapp.com/k9102/notes',
+                    url: url,
                     type: 'post',
-                    data: rec,
-                    success: function (data) {
-                        console.log(data);
-                    }
+                    data: rec
+                }).done()(function (msg) {
+                        console.log(msg);
                 });
 
             });
@@ -49,14 +51,14 @@
             );
 
             /*clear edit box*/
-            cnt.value = "";
+            $("#cnt").val("");
 
-            /*attach the handler to "remove" button*/
+            /*attach the handler to "삭제" button*/
             $(`#${rec.id}`).on("click", function () {
                 $(this).parent().parent().remove();
                 $.ajax({
                     method: "DELETE",
-                    url: `https://js-basic.herokuapp.com/k9102/notes/${rec.id}`,
+                    url: url+`/${rec.id}`
                 }).done(function (msg) {
                     console.log(`delete #${rec.id}`);
                     console.log(msg)
