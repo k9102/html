@@ -8,29 +8,41 @@
             var btn = document.getElementById('btn');
             var cnt = document.getElementById('cnt');
             btn.addEventListener('click', function () {
-                tmp = { 'id': memo.length + 1, 'date': new Date(), 'note': cnt.value };
-                memo.push(tmp);
-                $("#header").after(
-                    `<tr><td>${tmp.date}</td><td>${tmp.note}</td>` +
-                    `<th><input type="button" class="remove" value="삭제" id="${memo.length}"></th>` +
-                    "</tr>"
-                );
-                cnt.value = "";
-                $(`#${memo.length}`).on("click", function () {
-                    pos = parseInt(this.id) - 1;
-                    memo.splice(pos, 1);
-                    $(this).parent().parent().remove();
-                });
-
+                var rec = { 'id': memo.length + 1, 'date': new Date(), 'note': cnt.value };
+                addItem(rec);
                 $.ajax({
                     url: 'https://js-basic.herokuapp.com/k9102/notes',
                     type: 'post',
-                    data: tmp,
+                    data: rec,
                     success: function (data) {
                         console.log(data);
                     }
                 });
 
+            });
+        }
+
+        function addItem(rec) {
+            console.log(rec);
+            memo.push(rec);
+            $("#header").after(
+                `<tr><td>${rec.date.toLocaleString('en-US',{ hour12: false })}</td><td>${rec.note}</td>` +
+                `<th><input type="button" class="remove" value="삭제" id="${rec.id}"></th>` +
+                "</tr>"
+            );
+            cnt.value = "";
+
+            $(`#${rec.id}`).on("click", function () {
+                var pos = parseInt(this.id) - 1;
+                memo.splice(pos, 1);
+                $(this).parent().parent().remove();
+                $.ajax({
+                    method: "DELETE",
+                    url: `https://js-basic.herokuapp.com/k9102/notes/${rec.id}`,
+                }).done(function (msg) {
+                    console.log(`delete #${rec.id}`);
+                    console.log(msg)
+                });
             });
         }
     </script>
@@ -48,20 +60,18 @@
         </tr>
     </table>
     <script>
-        
-        $.ajax({
-            method: "DELETE",
-            url: "https://js-basic.herokuapp.com/k9102/notes/1",
-        }).done(function (msg) {
-            console.log(msg);
-        });
-
         $.ajax({
             method: "GET",
             url: "https://js-basic.herokuapp.com/k9102/notes",
             dataType: 'json'
         }).done(function (msg) {
             console.log(msg);
+            recs = msg.results;
+            for (i in recs) {
+                var rec = { 'id': recs[i].id, 'date': new Date(recs[i].date), 'note': recs[i].note };
+                memo.push(rec);
+                addItem(rec);
+            }
         });
 
     </script>
