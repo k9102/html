@@ -39,13 +39,13 @@ hr {border:0;border-top:1px solid #eee;margin:20px 0px}
 /* 1st panel */
 .panel-onethird {
   float:left;
-  width:300px;
+  width:25%;
   padding:0 8px;
 }
 /* 2nd panel */
 .panel-twothird {
   float:left;
-  width:800px;
+  width:75%;
   padding:0 8px;
 }
 /* 3rd panel */
@@ -54,4 +54,18 @@ footer {
   background-color:#009688;
   text-align: center;
   padding:0.01em 16px;
+}
+
+@media screen and (max-width:600px)
+{
+  /* 1st panel */
+  .panel-onethird {
+    width:100%;
+    padding:0 8px;
+  }
+  /* 2nd panel */
+  .panel-twothird {
+    width:100%;
+    padding:0 8px;
+  }
 }
