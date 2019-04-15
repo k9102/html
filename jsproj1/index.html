@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 
 <head>
+
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script>
-        var memo = [];
+        var memo = {};
         window.onload = function () {
             var btn = document.getElementById('btn');
             var cnt = document.getElementById('cnt');
             btn.addEventListener('click', function () {
+                var id = getId();
                 tmp = { 'date': new Date(), 'cnt': cnt.value };
-                memo.push(tmp);
+                memo[id]=tmp;
                 $("#header").after(
-                    `<tr><td>${tmp.date}</td><td>${tmp.cnt}</td>` +
-                    `<th><input type="button" class="remove" value="삭제" id="${memo.length}"></th>` +
+                    `<tr><td>${tmp.date.toLocaleString('en-US', { hour12: false })}</td><td>${tmp.cnt}</td>` +
+                    `<th><input type="button" class="remove" value="삭제" id=${id}></th>` +
                     "</tr>"
                 );
                 cnt.value = "";
-                $(`#${memo.length}`).on("click", function () {
-                    pos = parseInt(this.id)-1;
-                    memo.splice(pos,1);
+                $(`#${id}`).on("click", function () {
+                    delete memo[this.id];
                     $(this).parent().parent().remove();
                 });
             });
+        }
+        function getId() {
+            return Math.random().toString(36).substr(2, 9);
         }
     </script>
 </head>
