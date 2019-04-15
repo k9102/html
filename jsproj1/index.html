@@ -10,7 +10,7 @@
             btn.addEventListener('click', function () {
                 tmp = { 'date': new Date(), 'cnt': cnt.value };
                 memo.push(tmp);
-                $("#header").after("<tr><td>"+tmp.date+"</td>"+"<td>"+tmp.cnt+"</td>"+"</tr>");
+                $("#header").after(`<tr><td>${tmp.date.toLocaleString('en-US', { hour12: false })}</td>`+"<td>"+tmp.cnt+"</td>"+"</tr>");
                 cnt.value = "";
             });
         }
